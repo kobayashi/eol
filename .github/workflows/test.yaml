@@ -1,0 +1,29 @@
+name: Test
+on:
+  push:
+    branches:
+    - "*"
+  pull_request: {}
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+        - ubuntu-latest
+        - macOS-latest
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.x
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Lint
+      run: |
+        GO111MODULE=off GOBIN=$(pwd)/bin go get golang.org/x/lint/golint
+        bin/golint -set_exit_status ./...
+      if: "matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'"
+    - name: Test
+      run: go test -v ./...

@@ -2,6 +2,10 @@
 
 `eol` is command line tool for [endoflife.date](https://endoflife.date/). This is mostly inspired from [norwegianblue](https://github.com/hugovk/norwegianblue) built in python.
 
+## getting Started
+
+    go install github.com/kobayashi/eol@latest
+
 ## usage
 
 - get list of projects
@@ -91,3 +95,7 @@ eol project go 1.17 -f html
 </table>
 
 ```
+
+## License
+
+MIT

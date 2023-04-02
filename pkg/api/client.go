@@ -66,13 +66,13 @@ type ProjectList []string
 // Cycle is for specific project cycle
 type Cycle struct {
 	Cycle          StringOrInt  `json:"cycle"`
-	Release        *string      `json:"release"`
+	ReleaseDate    *string      `json:"releaseDate"`
 	EOL            StringOrBool `json:"eol"`
 	Latest         *string      `json:"latest"`
 	Link           *string      `json:"link,omitempty"`
 	LTS            *bool        `json:"lts,omitempty"`
 	Support        StringOrBool `json:"support,omitempty"`
-	CycleShortHand StringOrInt  `json:"cycleShortHand"`
+	CycleShortHand StringOrInt  `json:"codename"`
 	Discontinued   StringOrBool `json:"disconitinued"`
 }
 

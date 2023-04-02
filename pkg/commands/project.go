@@ -108,6 +108,21 @@ func createContentList(cycles api.CycleList) (*tableContenet, error) {
 			}
 			row = append(row, *p.Cycle.I)
 		}
+		if p.CycleShortHand.S != nil {
+			h := "Codename"
+			exist := header.isHeaderExist(h)
+			if !exist {
+				header.Row = append(header.Row, h)
+			}
+			row = append(row, *p.CycleShortHand.S)
+		} else if p.CycleShortHand.I != nil {
+			h := "Codename"
+			exist := header.isHeaderExist(h)
+			if !exist {
+				header.Row = append(header.Row, h)
+			}
+			row = append(row, *p.CycleShortHand.I)
+		}
 		if p.EOL.S != nil {
 			eol, err := setColorDate(*p.EOL.S)
 			if err != nil {
@@ -128,13 +143,13 @@ func createContentList(cycles api.CycleList) (*tableContenet, error) {
 			}
 			row = append(row, eol)
 		}
-		if p.Release != nil {
-			h := "Release"
+		if p.ReleaseDate != nil {
+			h := "Release Date"
 			exist := header.isHeaderExist(h)
 			if !exist {
 				header.Row = append(header.Row, h)
 			}
-			row = append(row, *p.Release)
+			row = append(row, *p.ReleaseDate)
 		}
 		if p.Support.S != nil {
 			h := "Support"
@@ -191,9 +206,9 @@ func createContent(cycle *api.Cycle) (*tableContenet, error) {
 		header = append(header, "#")
 		row = append(row, *cycle.Cycle.I)
 	}
-	if cycle.Release != nil {
+	if cycle.ReleaseDate != nil {
 		header = append(header, "Release")
-		row = append(row, *cycle.Release)
+		row = append(row, *cycle.ReleaseDate)
 	}
 	if cycle.EOL.S != nil {
 		eol, err := setColorDate(*cycle.EOL.S)

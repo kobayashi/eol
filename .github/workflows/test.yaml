@@ -13,17 +13,17 @@ jobs:
         os:
         - ubuntu-latest
         - macOS-latest
+    timeout-minutes: 5
     steps:
     - name: Set up Go
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v5
       with:
         go-version: 1.x
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Lint
-      run: |
-        GO111MODULE=off GOBIN=$(pwd)/bin go get golang.org/x/lint/golint
-        bin/golint -set_exit_status ./...
-      if: "matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'"
+      uses: golangci/golangci-lint-action@v3
+      with:
+        args: --verbose
     - name: Test
       run: go test -v ./...

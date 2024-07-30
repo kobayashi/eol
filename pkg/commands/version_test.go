@@ -22,6 +22,6 @@ func capture(f func()) string {
 	w.Close()
 	os.Stdout = out
 	var buf bytes.Buffer
-	io.Copy(&buf, r)
+	_, _ = io.Copy(&buf, r)
 	return buf.String()
 }

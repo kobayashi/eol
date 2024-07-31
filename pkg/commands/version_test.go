@@ -9,7 +9,7 @@ import (
 
 func TestRunVersion(t *testing.T) {
 	out := capture(RunVersion)
-	if out != "v0.1.0" {
+	if out != "v0.2.0" {
 		t.Errorf("unexpected output: %s", out)
 	}
 }

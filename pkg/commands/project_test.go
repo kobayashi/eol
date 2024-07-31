@@ -23,7 +23,7 @@ func TestCreateContentList(t *testing.T) {
 	s := `[
   {
     "cycle": "21.04",
-    "cycleShortHand": "HirsuteHippo",
+    "codename": "HirsuteHippo",
     "lts": false,
     "release": "2021-04-22",
     "support": "2022-01-01",
@@ -33,7 +33,7 @@ func TestCreateContentList(t *testing.T) {
   },
   {
     "cycle": 10,
-    "cycleShortHand": 10,
+    "codename": 10,
     "lts": false,
     "release": "2020-10-22",
     "support": true,
@@ -43,7 +43,7 @@ func TestCreateContentList(t *testing.T) {
   }
 ]`
 	cl := api.CycleList{}
-	json.Unmarshal([]byte(s), &cl)
+	_ = json.Unmarshal([]byte(s), &cl)
 	tl, err := createContentList(cl)
 	if err != nil {
 		t.Errorf("error: %s", err)
@@ -59,15 +59,15 @@ func TestCreateContentList(t *testing.T) {
 func TestCreateContent(t *testing.T) {
 	testCases := []string{
 		`{
-			"release": "2020-10-05",
+			"releaseDate": "2020-10-05",
 			"eol": "2025-10-05",
 			"latest": "3.9.5",
 			"link": "https://www.python.org/downloads/release/python-395/"
 		}`,
 		`{
-			"cycleShortHand": "HirsuteHippo",
+			"codename": "HirsuteHippo",
 			"lts": false,
-			"release": "2021-04-22",
+			"releaseDate": "2021-04-22",
 			"support": "2022-01-01",
 			"eol": "2022-01-01",
 			"latest": "21.04",
@@ -76,7 +76,7 @@ func TestCreateContent(t *testing.T) {
 	}
 	for i, s := range testCases {
 		c := api.Cycle{}
-		json.Unmarshal([]byte(s), &c)
+		_ = json.Unmarshal([]byte(s), &c)
 		tc, err := createContent(&c)
 		if err != nil {
 			t.Errorf("error: %s", err)

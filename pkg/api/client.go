@@ -72,7 +72,7 @@ type Cycle struct {
 	Link           *string      `json:"link,omitempty"`
 	LTS            *bool        `json:"lts,omitempty"`
 	Support        StringOrBool `json:"support,omitempty"`
-	CycleShortHand StringOrInt  `json:"codename"`
+	Codename       StringOrInt  `json:"codename"`
 	Discontinued   StringOrBool `json:"disconitinued"`
 }
 

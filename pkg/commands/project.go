@@ -3,7 +3,6 @@ package commands
 import (
 	"context"
 	"errors"
-	"fmt"
 	"os"
 	"time"
 
@@ -108,20 +107,20 @@ func createContentList(cycles api.CycleList) (*tableContenet, error) {
 			}
 			row = append(row, *p.Cycle.I)
 		}
-		if p.CycleShortHand.S != nil {
+		if p.Codename.S != nil {
 			h := "Codename"
 			exist := header.isHeaderExist(h)
 			if !exist {
 				header.Row = append(header.Row, h)
 			}
-			row = append(row, *p.CycleShortHand.S)
-		} else if p.CycleShortHand.I != nil {
+			row = append(row, *p.Codename.S)
+		} else if p.Codename.I != nil {
 			h := "Codename"
 			exist := header.isHeaderExist(h)
 			if !exist {
 				header.Row = append(header.Row, h)
 			}
-			row = append(row, *p.CycleShortHand.I)
+			row = append(row, *p.Codename.I)
 		}
 		if p.EOL.S != nil {
 			eol, err := setColorDate(*p.EOL.S)
@@ -176,7 +175,6 @@ func createContentList(cycles api.CycleList) (*tableContenet, error) {
 		}
 		if p.Discontinued.S != nil {
 			h := "Discontinued"
-			fmt.Println(h)
 			exist := header.isHeaderExist(h)
 			if !exist {
 				header.Row = append(header.Row, "Discontinued")
@@ -184,7 +182,6 @@ func createContentList(cycles api.CycleList) (*tableContenet, error) {
 			row = append(row, *p.Discontinued.S)
 		} else if p.Discontinued.B != nil {
 			h := "Discontinued"
-			fmt.Println(h)
 			exist := header.isHeaderExist(h)
 			if !exist {
 				header.Row = append(header.Row, "Discontinued")
@@ -241,12 +238,12 @@ func createContent(cycle *api.Cycle) (*tableContenet, error) {
 		header = append(header, "Support")
 		row = append(row, *cycle.Support.B)
 	}
-	if cycle.CycleShortHand.S != nil {
-		header = append(header, "CycleShortHand")
-		row = append(row, *cycle.CycleShortHand.S)
-	} else if cycle.CycleShortHand.I != nil {
-		header = append(header, "CycleShortHand")
-		row = append(row, *cycle.CycleShortHand.I)
+	if cycle.Codename.S != nil {
+		header = append(header, "Codename")
+		row = append(row, *cycle.Codename.S)
+	} else if cycle.Codename.I != nil {
+		header = append(header, "Codename")
+		row = append(row, *cycle.Codename.I)
 	}
 	if cycle.Discontinued.S != nil {
 		header = append(header, "Discontinued")
@@ -279,14 +276,6 @@ func (h *tableHeader) isHeaderExist(s string) bool {
 		}
 	}
 	return false
-}
-
-func (tcl *tableContenet) display(format string) {
-	t := table.NewWriter()
-	t.SetOutputMirror(os.Stdout)
-	t.AppendHeader(tcl.header.Row)
-	t.AppendRows(tcl.rows)
-	t.Render()
 }
 
 func (tf *tableFormat) display(tcl *tableContenet) {

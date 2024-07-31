@@ -5,8 +5,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var format string
-
 // projectCmd represents the project command
 var projectCmd = &cobra.Command{
 	Use:   "project",
